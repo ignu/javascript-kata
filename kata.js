@@ -29,7 +29,7 @@ const assertEq = (a, b) => {
  * a new function that just returns that string.
  */
 const say = (string) => {
-  return () => string //__()
+  __()
 }
 
 const sayHello = say("hello")
@@ -45,7 +45,6 @@ assertEq(sayHello(), "hello")
  * Write a function that takes one parameter and returns that same parameter
  */
 M.identity = __
-M.identity = (x) => x
 
 assertEq(M.identity(1), 1)
 
@@ -54,11 +53,6 @@ assertEq(M.identity(1), 1)
  * for every argument in the array.
  */
 M.each = (fn, list) => __()
-M.each = (fn, list) => {
-  for (i = 0; i < list.length; i++) {
-    fn(list[i])
-  }
-}
 
 let str = ''
 let addToStr = (letter) => str += letter
@@ -74,13 +68,6 @@ assertEq(str, 'hello')
  */
 M.map = (fn, list) => __()
 
-M.map = (fn, list) => {
-  let rv = [];
-  let addToArray = (i) => rv.push(fn(i))
-  M.each(addToArray, list);
-  return rv;
-}
-
 const double = (x) => x * 2
 
 let numbers = [1, 2, 3, 4]
@@ -92,12 +79,6 @@ assertEq(newNumbers.toString(), [2, 4, 6, 8].toString())
  * for which all the elements in the predicate return true.
  */
 M.filter = (fn, numbers) => __()
-M.filter = (callback, numbers) => {
-  let rv = [];
-  let addToArray = (i) => callback(i) && rv.push(i)
-  M.each(addToArray, numbers);
-  return rv;
-}
 
 const isEven = (x) => x % 2 == 0;
 
@@ -106,25 +87,20 @@ assertEq(M.filter(isEven, [1, 2, 3, 4]).toString(), [2, 4].toString())
 
 /* Reduce builds up a single result from a list of values
  */
-M.reduce = (fn, acc, array) => {
-  let newAcc = acc;
-
-  M.each((i) => {
-    newAcc = fn(newAcc, i);
-  }, array)
-
-  return newAcc;
-}
+M.reduce = (fn, acc, array) => __()
 
 const add = (a, b) => a + b
 
 let total = M.reduce(add, 0, [1, 2, 3, 4])
 assertEq(total, 10)
 
-// PropEq
-//------
-
-M.propEq = (prop, val) => (obj) => obj[prop] === val;
+/* PropEq takes two parameters. The first is the property name and
+ * the second is the value that it should test equality.
+ *
+ * Hint: If you want to get a dynamic property in javascript, use
+ * square brackets. i.e. `obj[myVariable]`
+ */
+M.propEq = (prop, val) => __
 
 const people = [{firstName: 'Jon'}, { firstName: 'Sansa'}]
 
@@ -134,14 +110,11 @@ assertEq(jons.length, 1)
 
 // Currying
 //------
-
-//const curriedAdd = __
-
-const curriedAdd = (a) => (b) => add(a, b)
+const curriedAdd = __
 
 const add2 = curriedAdd(2)
 
-assert(add2(3) == 5, "Curry")
+assertEq(add2(3), 5)
 
 /* Performs right-to-left function composition.
  * The rightmost function may have any arity; the remaining functions must be unary.
@@ -149,16 +122,7 @@ assert(add2(3) == 5, "Curry")
  *  Hint: you'll need to be familiar with `arguments` and `.apply`. If you're not
  *  this might be a good place to cheat.
  */
-M.compose = function() {
-  var args = arguments;
-  var start = args.length - 1;
-    return function() {
-      var i = start;
-      var result = args[start].apply(this, arguments);
-      while (i--) result = args[i].call(this, result);
-      return result;
-    };
-};
+M.compose = __
 
 let doubleThrice = M.compose(
   double, double, double
