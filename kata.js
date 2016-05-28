@@ -1,7 +1,7 @@
 /**
  * Lets practice functional programming by building our own
  * functional library in the vein of underscore, lodash, and ramda,
- *
+ */
 console.log("*--------------------------------------------*")
 
 /**
